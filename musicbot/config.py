@@ -82,6 +82,9 @@ class Config:
         self.blacklist_file = config.get('Files', 'BlacklistFile', fallback=ConfigDefaults.blacklist_file)
         self.auto_playlist_file = config.get('Files', 'AutoPlaylistFile', fallback=ConfigDefaults.auto_playlist_file)
 
+        self.auto_playlist_comments = config.getboolean('MusicBot', 'AutoPlaylistComments', fallback = ConfigDefaults.auto_playlist_comments)
+        self.auto_playlist_comment_prefix = config.getboolean('MusicBot', 'AutoPlaylistCommentPrefix', fallback = ConfigDefaults.auto_playlist_comment_prefix)
+
         self.run_checks()
 
 
@@ -191,6 +194,9 @@ class ConfigDefaults:
     options_file = 'config/options.ini'
     blacklist_file = 'config/blacklist.txt'
     auto_playlist_file = 'config/autoplaylist.txt' # this will change when I add playlists
+
+    auto_playlist_comments = False
+    auto_playlist_comment_prefix = '#'
 
 # These two are going to be wrappers for the id lists, with add/remove/load/save functions
 # and id/object conversion so types aren't an issue

@@ -419,6 +419,11 @@ class MusicBot(discord.Client):
                 song_url = choice(self.autoplaylist)
                 info = await self.downloader.safe_extract_info(player.playlist.loop, song_url, download=False, process=False)
 
+                # Remove comments
+                if self.config.auto_playlist_comments:
+                    comment_prefix = self.config.auto_playlist_comment_prefix
+                    song_url = song_url.split(comment_prefix, 1)[0]
+
                 if not info:
                     self.autoplaylist.remove(song_url)
                     self.safe_print("[Info] Removing unplayable song from autoplaylist: %s" % song_url)

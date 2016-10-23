@@ -1229,35 +1229,35 @@ class MusicBot(discord.Client):
         Prints a random set of overwatch heroes.
         """
         heroes = [
-            ':dva: D\'Va',
-            ':zenyatta: Zenyatta',
-            ':junkrat: Junkrat',
-            ':lucio: Lúcio',
-            ':tracer: Tracer',
-            ':symmetra: Symmetra',
-            ':zarya: Zarya',
-            ':winston: Winston',
-            ':bastion: Bastion',
-            ':mei: Mei',
-            ':pharah: Pharah',
-            ':widowmaker: Widowmaker',
-            ':mercy: Mercy',
-            ':genji: Genji',
-            ':mcree: McCree',
-            ':hanzo: Hanzo',
-            ':roadhog: Roadhog',
-            ':torbjorn: Torbjörn',
-            ':reinhardt: Reinhardt',
-            ':soldier: Soldier 76',
-            ':reaper: Reaper',
-            'Ana'
+            "D\'Va",
+            "Zenyatta",
+            "Junkrat",
+            "Lúcio",
+            "Tracer",
+            "Symmetra",
+            "Zarya",
+            "Winston",
+            "Bastion",
+            "Mei",
+            "Pharah",
+            "Widowmaker",
+            "Mercy",
+            "Genji",
+            "McCree",
+            "Hanzo",
+            "Roadhog",
+            "Torbjörn",
+            "Reinhardt",
+            "Soldier 76",
+            "Reaper",
+            "Ana"
         ]
 
         try:
             leftover_args[0]
         except IndexError:
             out = choice(heroes)
-            return Response("Your randomly selected hero is... **" + out + "**!", delete_after=10)
+            return Response(":game_die: Your randomly selected hero is... **" + out + "**!", delete_after=10)
 
         val = leftover_args[0]
         try:
@@ -1266,7 +1266,7 @@ class MusicBot(discord.Client):
             return Response("Please enter a number...")
 
         if randint(0,100) < 10:
-            return Response("Jackpot!  You\'re all picking... **" + choice(heroes) + "**!", delete_after=10)
+            return Response(":moneybag: Jackpot!  You\'re all picking... **" + choice(heroes) + "**! :moneybag: ", delete_after=10)
 
         out = ''
         comma = ''

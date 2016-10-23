@@ -1257,16 +1257,16 @@ class MusicBot(discord.Client):
             leftover_args[0]
         except IndexError:
             out = choice(heroes)
-            return Response('Your randomly selected hero is... **' + out + '**!', delete_after=10)
+            return Response("Your randomly selected hero is... **" + out + "**!", delete_after=10)
 
         val = leftover_args[0]
         try:
             val = int(val)
         except ValueError:
-            return Response('Please enter a number...')
+            return Response("Please enter a number...")
 
         if randint(0,100) < 10:
-            return Response('Jackpot!  You\'re all picking... **' + choice(heroes) + '**!', delete_after=10)
+            return Response("Jackpot!  You\'re all picking... **" + choice(heroes) + "**!", delete_after=10)
 
         out = ''
         comma = ''

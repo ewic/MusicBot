@@ -19,7 +19,7 @@ from io import BytesIO
 from functools import wraps
 from textwrap import dedent
 from datetime import timedelta
-from random import choice, shuffle
+from random import choice, shuffle, randint
 from collections import defaultdict
 
 from musicbot.playlist import Playlist
@@ -1220,6 +1220,60 @@ class MusicBot(discord.Client):
 
         if not info:
             return Response("No videos found.", delete_after=30)
+
+    async def cmd_randowatch(self, permissions, leftover_args):
+        """
+        Usage:
+            {command_prefix}randowatch [number]
+
+        Prints a random set of overwatch heroes.
+        """
+        heroes = [
+            'D\'Va',
+            'Zenyatta',
+            'Junkrat',
+            'Lúcio',
+            'Tracer',
+            'Symmetra',
+            'Zarya',
+            'Winston',
+            'Bastion',
+            'Mei',
+            'Pharah',
+            'Widowmaker',
+            'Mercy',
+            'Genji',
+            'McCree',
+            'Hanzo',
+            'Roadhog',
+            'Torbjörn',
+            'Reinhardt',
+            'Soldier 76',
+            'Reaper',
+            'Ana'
+        ]
+
+        try:
+            leftover_args[0]
+        except IndexError:
+            out = choice(heroes)
+            return Response('Your randomly selected hero is... **' + out + '**!', delete_after=10)
+
+        val = leftover_args[0]
+        try:
+            val = int(val)
+        except ValueError:
+            return Response('Please enter a number...')
+
+        if randint(0,100) < 10:
+            return Response('Jackpot!  You\'re all picking... **' + choice(heroes) + '**!', delete_after=10)
+
+        out = ''
+        comma = ''
+        for x in range(0, val):
+            out = out + comma + choice(heroes)
+            comma = ', '
+        return Response(out, delete_after=10)
 
         def check(m):
             return (

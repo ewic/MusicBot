@@ -1224,7 +1224,7 @@ class MusicBot(discord.Client):
     async def cmd_randowatch(self, permissions, leftover_args):
         """
         Usage:
-            {command_prefix}randowatch [number]
+            {command_prefix}randowatch [number] [options]
 
         Prints a random set of overwatch heroes.
         """
@@ -1259,11 +1259,19 @@ class MusicBot(discord.Client):
             out = choice(heroes)
             return Response(":game_die: Your randomly selected hero is... **" + out + "**!", delete_after=10)
 
+        try:
+            if leftover_args[1] == "norepeat":
+                norepeat = True
+        except IndexError:
+            norepeat = False
+
         val = leftover_args[0]
         try:
             val = int(val)
+            if val > 6:
+                val=6
         except ValueError:
-            return Response("Please enter a number...")
+            return Response("Please enter a number...", delete_after=10)
 
         if randint(0,100) < 10:
             return Response(":moneybag: Jackpot!  You\'re all picking... **" + choice(heroes) + "**! :moneybag: ", delete_after=10)
@@ -1271,8 +1279,12 @@ class MusicBot(discord.Client):
         out = ''
         comma = ''
         for x in range(0, val):
-            out = out + comma + choice(heroes)
+            hero = choice(heroes)
+            out = out + comma + hero
             comma = ', '
+            if norepeat == True:
+                heroes.remove(hero)
+
         return Response(out, delete_after=10)
 
         def check(m):
